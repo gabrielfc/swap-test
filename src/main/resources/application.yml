@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: swap-test
+
+logging:
+  level:
+    root: INFO
+    com.seuprojeto: DEBUG              # Ativando logs para debug
