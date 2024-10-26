@@ -4,8 +4,15 @@ server:
 spring:
   application:
     name: swap-test
+    
+    
+github:
+  url: https://api.github.com
+    
+webhook:
+  url: https://webhook.site/ce3bd36b-e4c3-4e6f-b88a-d7c787e05711
 
 logging:
   level:
     root: INFO
-    com.seuprojeto: DEBUG              # Ativando logs para debug
+    com.seuprojeto: DEBUG
