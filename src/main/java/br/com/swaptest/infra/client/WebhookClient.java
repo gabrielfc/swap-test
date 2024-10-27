@@ -5,6 +5,7 @@ import br.com.swaptest.domain.Issue;
 import br.com.swaptest.infra.client.converter.ContributorConverter;
 import br.com.swaptest.infra.client.converter.IssueConverter;
 import br.com.swaptest.infra.client.dto.ResponseDataDTO;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -30,6 +31,7 @@ public class WebhookClient {
         return sendToWebhook(responseData);
     }
 
+    @Retry(name = "webhookRetry")
     public Mono<Void> sendToWebhook(ResponseDataDTO data) {
         return webClient.post()
                 .bodyValue(data)

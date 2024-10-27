@@ -6,7 +6,7 @@ github:
   url: https://api.github.com
 
 webhook:
-  url: https://webhook.site/ce3bd36b-e4c3-4e6f-b88a-d7c787e05711
+  url: https://webhook.site/d2adea52-4308-4bee-aeef-cb2f87f89307
 
 resilience4j:
   retry:
@@ -17,16 +17,6 @@ resilience4j:
       webhookRetry:
         maxAttempts: 3
         waitDuration: 2s
-  circuitbreaker:
-    instances:
-      githubCircuitBreaker:
-        slidingWindowSize: 5
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10s
-      webhookCircuitBreaker:
-        slidingWindowSize: 5
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10s
 
 logging:
   level:

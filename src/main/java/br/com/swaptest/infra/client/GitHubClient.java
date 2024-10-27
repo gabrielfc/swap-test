@@ -2,6 +2,7 @@ package br.com.swaptest.infra.client;
 
 import br.com.swaptest.domain.Contributor;
 import br.com.swaptest.domain.Issue;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,6 +19,7 @@ public class GitHubClient {
         this.webClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 
+    @Retry(name = "githubRetry")
     public Flux<Issue> fetchIssues(String owner, String repo) {
         return webClient.get()
                 .uri("/repos/{owner}/{repo}/issues", owner, repo)
@@ -25,6 +27,7 @@ public class GitHubClient {
                 .bodyToFlux(Issue.class);
     }
 
+    @Retry(name = "githubRetry")
     public Flux<Contributor> fetchContributors(String user, String repository) {
         return webClient.get()
                 .uri("/repos/{user}/{repo}/contributors", user, repository)
