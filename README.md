@@ -9,3 +9,16 @@ Para implementação, utilizamos as seguintes tecnologias e frameworks:
 - Springboot 3
 - Docker
 - Maven
+
+## Veja abaixo os principais comandos para execução do projeto:
+
+###Buildar o projeto
+
+docker build -t swap-test .
+
+###Deploy in local docker
+
+docker run -d -p 8080:8080 --name test-service-container test-swap
+
+###View logs
+docker logs test-service-container

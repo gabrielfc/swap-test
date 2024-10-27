@@ -17,6 +17,8 @@ import static org.mockito.Mockito.when;
 
 public class IssueControllerTest {
 
+    public static final String ERROR_MSG = "Erro de processamento";
+
     @Mock
     private GetRepositoryDataUseCase getRepositoryDataUseCase;
 
@@ -46,13 +48,13 @@ public class IssueControllerTest {
         UserInfoDTO userInfo = new UserInfoDTO("user", "repository");
 
         when(getRepositoryDataUseCase.processRepositoryData(any(), any()))
-                .thenReturn(Mono.error(new RuntimeException("Erro de processamento")));
+                .thenReturn(Mono.error(new RuntimeException(ERROR_MSG)));
 
         Mono<ResponseEntity<String>> response = issueController.processRepository(userInfo);
 
         StepVerifier.create(response)
                 .expectNext(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("Erro de processamento"))
+                        .body(ERROR_MSG))
                 .verifyComplete();
     }
 }

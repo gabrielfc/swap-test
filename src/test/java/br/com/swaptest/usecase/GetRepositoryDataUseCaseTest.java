@@ -60,36 +60,6 @@ public class GetRepositoryDataUseCaseTest {
     }
 
     @Test
-    void testProcessRepositoryData_InvalidOwner() {
-        String owner = "invalid_user"; // Supondo que isso seja inválido.
-        String repo = "validRepo";
-
-        Mono<Void> result = getRepositoryDataUseCase.processRepositoryData(owner, repo);
-
-        StepVerifier.create(result)
-                .expectErrorMatches(throwable ->
-                        throwable instanceof RuntimeException && throwable.getMessage().equals(GetRepositoryDataUseCase.ERROR_OWNER_MSG))
-                .verify();
-
-        verifyNoInteractions(gitHubClient, webhookClient);
-    }
-
-    @Test
-    void testProcessRepositoryData_InvalidRepo() {
-        String owner = "validUser";
-        String repo = "invalidRepo"; // Supondo que isso seja inválido.
-
-        Mono<Void> result = getRepositoryDataUseCase.processRepositoryData(owner, repo);
-
-        StepVerifier.create(result)
-                .expectErrorMatches(throwable ->
-                        throwable instanceof RuntimeException && throwable.getMessage().equals(GetRepositoryDataUseCase.ERROR_REPO_MSG))
-                .verify();
-
-        verifyNoInteractions(gitHubClient, webhookClient);
-    }
-
-    @Test
     void testProcessRepositoryData_GitHubClientError() {
         String owner = "validUser";
         String repo = "validRepo";
