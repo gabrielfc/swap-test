@@ -7,3 +7,4 @@ Para implementação, utilizamos as seguintes tecnologias e frameworks:
 - Java 17
 - Springboot 3
 - Docker
+- Maven

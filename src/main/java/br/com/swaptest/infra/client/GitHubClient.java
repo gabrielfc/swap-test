@@ -1,5 +1,4 @@
-package br.com.swaptest.infra.rest.client;
-
+package br.com.swaptest.infra.client;
 
 import br.com.swaptest.domain.Contributor;
 import br.com.swaptest.domain.Issue;
@@ -8,11 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
-
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class GitHubClient {
@@ -23,20 +18,18 @@ public class GitHubClient {
         this.webClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 
-    public Flux<Issue> getIssues(String user, String repository, LocalDate date) {
+    public Flux<Issue> fetchIssues(String owner, String repo) {
         return webClient.get()
-                .uri("/repos/{user}/{repo}/issues", user, repository)
+                .uri("/repos/{owner}/{repo}/issues", owner, repo)
                 .retrieve()
                 .bodyToFlux(Issue.class);
     }
 
-    public Flux<Contributor> getContributors(String user, String repository) {
+    public Flux<Contributor> fetchContributors(String user, String repository) {
         return webClient.get()
                 .uri("/repos/{user}/{repo}/contributors", user, repository)
                 .retrieve()
                 .bodyToFlux(Contributor.class);
     }
-
-
 }
 
