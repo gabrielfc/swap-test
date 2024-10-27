@@ -29,7 +29,7 @@ docker build -t swap-test .
 ###Deploy in local docker
 
 ```
-docker run -d -p 8080:8080 --name test-service-container test-swap
+docker run -d -p 8080:8080 --name test-service-container swap-test
 ```
 
 ###View logs
