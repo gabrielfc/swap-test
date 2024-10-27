@@ -2,6 +2,8 @@ package br.com.swaptest.infra.client;
 
 import br.com.swaptest.domain.Contributor;
 import br.com.swaptest.domain.Issue;
+import br.com.swaptest.infra.client.converter.ContributorConverter;
+import br.com.swaptest.infra.client.converter.IssueConverter;
 import br.com.swaptest.infra.client.dto.ResponseDataDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -9,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class WebhookClient {
@@ -20,7 +23,9 @@ public class WebhookClient {
 
     public Mono<Void> sendToExternalEndpoint(String owner, String repo,  List<Issue> issues, List<Contributor> contributors) {
 
-        ResponseDataDTO responseData = new ResponseDataDTO(owner, repo, issues, contributors);
+        ResponseDataDTO responseData = new ResponseDataDTO(owner, repo,
+                IssueConverter.toListDTO(issues),
+                ContributorConverter.toListDTO(contributors));
 
         return sendToWebhook(responseData);
     }
