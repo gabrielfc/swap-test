@@ -12,7 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class WebhookClient {
@@ -22,7 +21,7 @@ public class WebhookClient {
         this.webClient = webClientBuilder.baseUrl(webhookUrl).build();
     }
 
-    public Mono<Void> sendToExternalEndpoint(String owner, String repo,  List<Issue> issues, List<Contributor> contributors) {
+    public Mono<Void> sendToExternalEndpoint(String owner, String repo, List<Issue> issues, List<Contributor> contributors) {
 
         ResponseDataDTO responseData = new ResponseDataDTO(owner, repo,
                 IssueConverter.toListDTO(issues),

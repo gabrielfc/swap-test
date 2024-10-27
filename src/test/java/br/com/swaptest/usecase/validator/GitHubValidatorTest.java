@@ -1,7 +1,9 @@
 package br.com.swaptest.usecase.validator;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GitHubValidatorTest {
 
@@ -15,7 +17,7 @@ public class GitHubValidatorTest {
         assertFalse(GitHubValidator.isValidUsername("invalid-"));
         assertFalse(GitHubValidator.isValidUsername("invalid_username!"));
         assertFalse(GitHubValidator.isValidUsername(null));
-        assertFalse(GitHubValidator.isValidRepositoryName("a".repeat(40))); // Testando limite máximo
+        assertFalse(GitHubValidator.isValidUsername("a".repeat(40))); // Testando limite máximo
     }
 
     @Test

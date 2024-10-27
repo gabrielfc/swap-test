@@ -11,7 +11,9 @@ public record Issue(
         List<Label> labels,
         @JsonProperty("created_at") OffsetDateTime createdAt
 ) {
-    public record User(String login) {}
+    public record User(String login) {
+    }
 
-    public record Label(String name) {}
+    public record Label(String name) {
+    }
 }

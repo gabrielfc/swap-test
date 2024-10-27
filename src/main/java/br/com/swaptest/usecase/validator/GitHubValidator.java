@@ -17,6 +17,4 @@ public class GitHubValidator {
         if (repoName == null) return false;
         return repoName.matches(REPO_NAME_REGEX);
     }
-
-
 }

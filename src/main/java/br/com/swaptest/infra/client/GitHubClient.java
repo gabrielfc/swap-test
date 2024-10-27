@@ -15,7 +15,7 @@ public class GitHubClient {
     private final WebClient webClient;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_DATE;
 
-    public GitHubClient(WebClient.Builder webClientBuilder,  @Value("${github.url}") String baseUrl) {
+    public GitHubClient(WebClient.Builder webClientBuilder, @Value("${github.url}") String baseUrl) {
         this.webClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 

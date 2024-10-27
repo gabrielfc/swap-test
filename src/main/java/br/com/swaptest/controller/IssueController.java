@@ -4,7 +4,10 @@ import br.com.swaptest.controller.dto.UserInfoDTO;
 import br.com.swaptest.usecase.GetRepositoryDataUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -18,6 +21,7 @@ public class IssueController {
     public IssueController(GetRepositoryDataUseCase getRepositoryDataUseCase) {
         this.getRepositoryDataUseCase = getRepositoryDataUseCase;
     }
+
     @PostMapping("/process-repository")
     public Mono<ResponseEntity<String>> processRepository(@RequestBody UserInfoDTO userInfo) {
         return getRepositoryDataUseCase.processRepositoryData(userInfo.user(), userInfo.repository())

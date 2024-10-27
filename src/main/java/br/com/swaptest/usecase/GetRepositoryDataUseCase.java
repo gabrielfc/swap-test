@@ -42,21 +42,21 @@ public class GetRepositoryDataUseCase {
                 .flatMapMany(contributors -> gitHubClient.fetchIssues(owner, repo)
                         .groupBy(issue -> issue.createdAt().toLocalDate())
                         .flatMap(groupedFlux -> processIssuesForDate(owner, repo, groupedFlux, contributors)))
-                        .onErrorResume(error -> {
-                            String errorMessage = ERROR_GITHUB_MSG + error.getMessage();
-                            System.err.println(errorMessage);
-                            return Mono.error(new RuntimeException(errorMessage));
-                        })
+                .onErrorResume(error -> {
+                    String errorMessage = ERROR_GITHUB_MSG + error.getMessage();
+                    System.err.println(errorMessage);
+                    return Mono.error(new RuntimeException(errorMessage));
+                })
                 .then();
     }
 
     private Mono<Void> validateInputData(String owner, String repo) {
-        if(!GitHubValidator.isValidUsername(owner)){
+        if (!GitHubValidator.isValidUsername(owner)) {
             String errorMessage = ERROR_OWNER_MSG;
             System.err.println(errorMessage);
             return Mono.error(new RuntimeException(errorMessage));
         }
-        if(!GitHubValidator.isValidRepositoryName(repo)){
+        if (!GitHubValidator.isValidRepositoryName(repo)) {
             String errorMessage = ERROR_REPO_MSG;
             System.err.println(errorMessage);
             return Mono.error(new RuntimeException(errorMessage));
