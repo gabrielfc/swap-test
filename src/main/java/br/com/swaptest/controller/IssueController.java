@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api")
 public class IssueController {
 
-    public static final String SUCCESS_MSG = "Processamento concluído com sucesso";
+    public static final String SUCCESS_MSG = "Processamento concluído com sucesso!";
 
     private final GetRepositoryDataUseCase getRepositoryDataUseCase;
 
