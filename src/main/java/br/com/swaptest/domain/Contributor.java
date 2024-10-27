@@ -1,4 +1,4 @@
 package br.com.swaptest.domain;
 
-public record Contributor (String name, String user, int qtdCommits) {
+public record Contributor (String login, int contributions) {
 }

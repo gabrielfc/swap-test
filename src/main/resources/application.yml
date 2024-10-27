@@ -3,14 +3,23 @@ server:
 
 spring:
   application:
-    name: swap-test
-    
+    name: swap-test    
     
 github:
   url: https://api.github.com
     
 webhook:
   url: https://webhook.site/ce3bd36b-e4c3-4e6f-b88a-d7c787e05711
+  
+resilience4j:
+  retry:
+    instances:
+      githubRetry:
+        maxAttempts: 3          # Número máximo de tentativas
+        waitDuration: 2s        # Tempo de espera entre tentativas
+      webhookRetry:
+        maxAttempts: 3
+        waitDuration: 2s
 
 logging:
   level:

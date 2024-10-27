@@ -15,6 +15,6 @@ public class IssueController {
     }
     @PostMapping("/process-repository")
     public Mono<Void> processRepository(@RequestBody UserInfoDTO userInfo) {
-        return getRepositoryDataUseCase.execute(userInfo.user(), userInfo.repository());
+        return getRepositoryDataUseCase.processRepositoryData(userInfo.user(), userInfo.repository());
     }
 }
